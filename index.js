@@ -25,7 +25,11 @@ mongoose.connect(
   }
 );
 app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 //middleware
 app.use(express.json());
 app.use(helmet());
